@@ -1,0 +1,17 @@
+version: "3.1"
+
+services:
+  database:
+    image: postgres:13-alpine
+    network_mode: bridge
+    environment:
+      POSTGRES_USER: arthub
+      POSTGRES_PASSWORD: arthub
+      POSTGRES_DB: arthub
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    ports:
+      - "5434:5432"
